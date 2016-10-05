@@ -75,3 +75,65 @@ span.user-stats {
 	font-size: 14px;
 	font-family: 'Open Sans', sans-serif;
 }
+
+ul.user-info {
+	border-bottom: none;
+	margin-top: 5%;
+	margin-left: 1%;
+	margin-bottom: 5%;
+}
+ul.user-info li{
+	margin-bottom: 0 !important;
+	border: 0 !important;
+}
+
+ul.user-info li a{
+	padding: 3px 30px;
+	font-family: 'Open Sans', sans-serif;
+	border-radius: 3px !important;
+	font-size: 16px;
+	text-decoration: none !important;
+	border: 0 !important;
+}
+
+ul.user-info>li.active {
+	border-bottom: none !important;
+}
+
+ul.user-info>li.active a {
+	border: 0 !important;
+	background-color: rgb(77,134,219);
+	color: #fff !important;	
+}
+ul.user-info>li.active a:hover {
+	border: 0 !important;	
+	background-color: rgb(77,134,219);
+}
+ul.user-info>li.active a:focus {
+	border: 0 !important;	
+	background-color: rgb(77,134,219);
+	color: #fff !important;
+}
+
+ul.user-info>li a:hover {
+	border: 0 !important;	
+	background-color: transparent;
+
+}
+
+img.album-logo {
+	height: 150px;
+	width: 150px;
+}
+
+p.album-author, p.album-title {
+	font-family: 'Open Sans', sans-serif;
+}
+
+p.album-author {
+	font-size: 14px;
+}
+p.album-title {
+	font-weight: bold;
+	font-size: 16px;
+}
