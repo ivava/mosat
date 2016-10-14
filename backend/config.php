@@ -7,6 +7,7 @@ define("DB_DSN", "mysql:host=localhost;dbname=mosat");
 define("DB_USERNAME", "root");
 define("DB_PASSWORD", "");
 define("CLASS_PATH", "backend/classes");
+define("ERROR_DB", "Не удалось подключиться к бд");
 
 // autoload
 spl_autoload_register(function($class_name) {

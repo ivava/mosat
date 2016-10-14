@@ -8,17 +8,19 @@
  */
 class User
 {
-public $id;
-public $login;
-public $email;
-public $fullName;
+    public $id;
+    public $login;
+    public $email;
+    public $fullName;
+    public $password;
 
 
-    public function __construct($fullName, $login, $mail)
+    public function __construct($fullName, $login, $mail, $password)
     {
         $this->fullName = $fullName;
         $this->login = $login;
         $this->mail = $mail;
+        $this->password = $password;
     }
 
 
@@ -26,6 +28,7 @@ public $fullName;
     public function insert() {
         if (!is_null($this->id)) {
             trigger_error("User::insert(): file exxist", ERROR_DB);
+//            return ERROR_DB;
         } else {
             $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
             $sql = "INSERT INTO usertbl (full_name, login, email) VALUES (:full_name, :login, :email)";
@@ -36,7 +39,7 @@ public $fullName;
             $st->execute();
             $this->id = $connect->lastInsertId();
             $connect = null;
+//            return SUC_DB;
         }
     }
-
 }

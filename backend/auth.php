@@ -13,7 +13,8 @@ if (!empty($_POST['full_name']) && !empty($_POST['email']) && !empty($_POST['use
     $email = htmlspecialchars($_POST['email']);
     $username = htmlspecialchars($_POST['username']);
     $password = htmlspecialchars($_POST['passwors']);
-    $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+   $user = new User($full_name, $username, $mail, $password);
+    $user->insert();
 
 }
 }
