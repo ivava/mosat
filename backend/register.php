@@ -15,7 +15,6 @@ if (!empty($_POST['full_name']) && !empty($_POST['email']) && !empty($_POST['use
     $password = htmlspecialchars($_POST['passwors']);
    $user = new User($full_name, $username, $mail, $password);
     $user->insert();
-
 }
 }
 

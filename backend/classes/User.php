@@ -42,4 +42,20 @@ class User
 //            return SUC_DB;
         }
     }
+    public static function auth($username, $password) {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT * FROM usertbl WHERE username='".$username."' AND password='".$password."'";
+        $st = $connect->prepare($sql);
+        $rows = $connect->query($st);
+        if ($rows != FALSE) {
+            $dbusername = $rows['username'];
+            $dbpassword = $rows['password'];
+            if ($username == $dbusername && $password == $dbpassword) {
+                $_SESSION['session_username'] = $username;
+                header("Location: ../../front/intro.php");
+            } else {
+                echo "Неправильный логин или пароль";
+            }
+        }
+    }
 }
