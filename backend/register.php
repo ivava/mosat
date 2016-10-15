@@ -13,8 +13,17 @@ if (!empty($_POST['full_name']) && !empty($_POST['email']) && !empty($_POST['use
     $email = htmlspecialchars($_POST['email']);
     $username = htmlspecialchars($_POST['username']);
     $password = htmlspecialchars($_POST['passwors']);
-   $user = new User($full_name, $username, $mail, $password);
-    $user->insert();
+   $user = new User($full_name, $username, $email, $password);
+    $ins = $user->insert();
+    if ($ins == FALSE) {
+        echo "Ошибка";
+    } else {
+        session_start();
+        $_SESSION['session_username'] = $user->login;
+        header("location: ../frontend/intro.php");
+    }
+} else {
+    echo "Необходимо заполнить все поля";
 }
 }
 

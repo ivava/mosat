@@ -39,6 +39,11 @@ class User
             $st->execute();
             $this->id = $connect->lastInsertId();
             $connect = null;
+            if (isset($this->id)) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
 //            return SUC_DB;
         }
     }

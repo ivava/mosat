@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>reg</title>
-</head>
-<body>
-<form>
-<input type="text" name="login" required="Ëîãèí">
-<input type="text" name="name" required="Èìÿ">
-<input type="mail" name="email" required="email">
-<input type="password" name="password" required="Ïàğîëü">
+<?php
+include ("templates/header.php");
+?>
+
+<form action="../backend/register.php" method="post">
+<input type="text" name="username" required placeholder="Ğ¸Ğ¼Ñ">
+<input type="text" name="full_name" required placeholder="Ğ¸Ğ¼Ñ">
+<input type="text" name="email" required placeholder="email">
+<input type="password" name="password" required placeholder="password">
 <input type="hidden" name="register">
-<input type="submit" name="submit" value="Îòïğàâèòü">
+<input type="submit" name="submit" value="Ğ ĞµĞ³Ğ¸ÑÑ‚Ñ€Ğ°Ñ†Ğ¸Ñ">
 </form>
-</body>
-</html>
+
