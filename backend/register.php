@@ -12,9 +12,10 @@ if (!empty($_POST['full_name']) && !empty($_POST['email']) && !empty($_POST['use
     $full_name = htmlspecialchars($_POST['full_name']);
     $email = htmlspecialchars($_POST['email']);
     $username = htmlspecialchars($_POST['username']);
-    $password = htmlspecialchars($_POST['passwors']);
+    $password = htmlspecialchars($_POST['password']);
    $user = new User($full_name, $username, $email, $password);
     $ins = $user->insert();
+//    $user->insert();
     if ($ins == FALSE) {
         echo "Ошибка";
     } else {

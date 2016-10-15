@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 
 include ("templates/header.php");
 require ("../backend/config.php");

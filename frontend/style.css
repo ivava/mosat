@@ -75,3 +75,26 @@ span.user-stats {
 	font-size: 14px;
 	font-family: 'Open Sans', sans-serif;
 }
+.base_form {
+	width: 200px;
+	margin: 100px auto 0 auto;
+}
+.base_form input:not([type="submit"]) {
+	display: block;
+	background: transparent;
+	border: 1px solid #e7e7e7;
+	margin-bottom: 5px;
+	padding: 10px;
+}
+.base_form input[type="submit"] {
+	background: rgba(77,134,219, 1);
+	border: none;
+	color: #ffffff;
+	padding: 12px;
+}
+.base_form input {
+	width: 100%;
+}
+.reg_form {
+	width: 20%;
+}
