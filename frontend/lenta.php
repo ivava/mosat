@@ -1,53 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css">
-</head>
-<body>
-	<nav class="navbar navbar-default" role="navigation">
-		<div class="container-fluid main-navigation">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-menu">
-					<span class="sr-only">MOSAT</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a href="#" class="navbar-brand">MOSAT</a>
-			</div>
-			<div class="collapse navbar-collapse" id="main-menu">
-				<ul class="nav navbar-nav">
-					<li><a href="#">Новинки</a></li>
-					<li><a href="#">Топ 100</a></li>
-					<li class="active"><a href="lenta.php">Лента</a></li>
-					<li><a href="#">Плейлист</a></li>
-					<li><a href="download.html">Загрузить</a></li>
-					<li><a href="#">Search</a></li>
-				</ul>	
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">11</a><li>
-					<li><a href="#">22</a></li>
-					<li class="dropdown btn-user">
-						<a href="user.html" class="dropdown-toggle" data-toggle="dropdown">googlife5 <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Ссылка</a></li>
-							<li><a href="#">Ссылка</a></li>
-							<li><a href="#">Ссылка</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Еще ссылка</a></li>
-						</ul>
-					</li>
-				</ul>			
-			</div>
-		</div>		
-	</nav>
+<?php
+include ("templates/header.php");
+?>
 	<div class="container lenta">
 	<div class="post">
 		<div class="row author-post-info">

@@ -6,8 +6,9 @@ include ("templates/header.php");
 <h2>Вы Вошли как <?php echo $_SESSION['session_username'] ?></h2>
 <?php } else { ?>
     <?php
-    if (isset($_SESSION['error_log'])) {
+    if ($_SESSION['error_log'] == 1) {
         echo "<p class='error_log'>Неправильный логин или пароль</p>";
+        $_SESSION['error_log'] = null;
     }
     ?>
 <form method="post" action="../backend/login.php" class="base_form">

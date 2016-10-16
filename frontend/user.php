@@ -1,7 +1,6 @@
 <?php
 include ("templates/header.php");
 ?>
-
 <div class="container">
 	<div class="row">
 		<div class="col-md-3">
@@ -10,8 +9,14 @@ include ("templates/header.php");
 		<div class="col-md-9">
 			<div class="row">
 				<div class="col-md-12">
-					<h3 class="username">Martin Garrix</h3>
-					<p class="userlogin">@MartinGarrix</p>
+					<h3 class="username"><?php
+						echo $User->fullName;
+					?>
+						?></h3>
+					<p class="userlogin">@
+					<?php
+					echo $User->login;
+?></p>
 					<p><a class="btn btn-primary btn-lg user-subscribe" role="button">Подписаться</a></p>
 				</div>
 			</div>

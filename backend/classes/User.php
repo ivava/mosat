@@ -13,18 +13,29 @@ class User
     public $email;
     public $fullName;
     public $password;
+    public $userList = array();
+    public $musicList = array();
 
 
-    public function __construct($fullName, $login, $mail, $password)
+    public function __construct($fullName, $login, $mail, $password, $id)
     {
         $this->fullName = $fullName;
         $this->login = $login;
         $this->email = $mail;
         $this->password = $password;
+        $this->id = $id;
     }
-
-
-
+    // Возвращает список друзей для текущего ползователя, массив содержит обькты User
+    public function getUserList() {
+        return $this->userList;
+    }
+    public function gitUserListCount() {
+        $count = 0;
+        foreach ($this->userList as $user) {
+            $count++;
+        }
+        return $count;
+    }
     public function insert() {
         if (!is_null($this->id)) {
             trigger_error("User::insert(): file exxist", ERROR_DB);
@@ -56,5 +67,29 @@ class User
         $rows = $st->fetch(PDO::FETCH_ASSOC);
         return $rows;
     }
+    public static function getUserById($id) {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT * FROM usertbl WHERE id='".$id."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+    public static function getUserByUsername($username) {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+            $sql = "SELECT * FROM usertbl WHERE username='".$username."'";
+            $st = $connect->prepare($sql);
+            $st->execute();
+            $rows = $st->fetch(PDO::FETCH_ASSOC);
+            return new User($rows['full_name'], $rows['username'], $rows['email'], $rows['password'], $rows['id']);
+    }
+    public function addMusicList($link) {
+        $this->musicList[] = $link;
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "INSERT INTO usertbl (musicList) VALUES (:musicList)";
+        $st = $connect->prepare($sql);
+        $st->bindValue(":musicList", $this->fullName, PDO::PARAM_STR);
+        $st->execute();
 
+    }
 }
