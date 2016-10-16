@@ -48,22 +48,13 @@ class User
 //            return SUC_DB;
         }
     }
-    public static function auth($username, $password) {
+    public static function getUserData($username, $password) {
         $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-        $sql = "SELECT INTO usertbl (username, password)";
-        $rows = $connect->query($sql);
-
-
-
-        if ($rows != FALSE) {
-            $dbusername = $rows['username'];
-            $dbpassword = $rows['password'];
-            if ($username == $dbusername && $password == $dbpassword) {
-
-
-            } else {
-                echo "Неправильный логин или пароль";
-            }
-        }
+        $sql = "SELECT * FROM usertbl WHERE username='".$username."' AND password='".$password."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        return $rows;
     }
+
 }
