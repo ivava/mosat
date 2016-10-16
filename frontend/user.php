@@ -1,23 +1,34 @@
 <?php
 include ("templates/header.php");
+require ("../backend/classes/User.php");
+require ("../backend/config.php");
+$user = User::getUserByUsername($_SESSION['session_username']);
 ?>
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-3">
-			<img src="assets/img/avatar.jpg" alt="" class="user-avatar">
+			<img src="<?php
+				echo $user->getAvatar();
+?>
+" alt="" class="user-avatar">
 		</div>
 		<div class="col-md-9">
 			<div class="row">
 				<div class="col-md-12">
 					<h3 class="username"><?php
-						echo $User->fullName;
-					?>
-						?></h3>
+						echo $user->fullName;
+					?></h3>
 					<p class="userlogin">@
 					<?php
-					echo $User->login;
+					echo $user->login;
 ?></p>
-					<p><a class="btn btn-primary btn-lg user-subscribe" role="button">Подписаться</a></p>
+					<p><a class="btn btn-primary btn-lg user-subscribe" role="button">Редактировать</a></p>
+					<form action="../backend/setAvatar.php" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="MAX_FILE_SIZE" value="160000000">
+						<input type="file" value="Загрузить" name="avatar">
+						<input type="submit" value="1">
+					</form>
 				</div>
 			</div>
 			<div class="row">

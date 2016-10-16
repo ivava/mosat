@@ -13,6 +13,7 @@ class User
     public $email;
     public $fullName;
     public $password;
+    public $avatar;
     public $userList = array();
     public $musicList = array();
 
@@ -91,5 +92,33 @@ class User
         $st->bindValue(":musicList", $this->fullName, PDO::PARAM_STR);
         $st->execute();
 
+    }
+    public function setAvatar($id, $file) {
+        $path = "../user_file/avatars/";
+        $upload_file = $path . basename($file['name']);
+        if (move_uploaded_file($file['tmp_name'], $upload_file)) {
+            $this->avatar = $upload_file;
+        }
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE usertbl
+        SET avatar='".$this->avatar."'
+         WHERE id='".$id."'";
+
+        $st = $connect->prepare($sql);
+        $st->bindValue(":avatar", $this->avatar, PDO::PARAM_STR);
+        $st->execute();
+        $connect = null;
+    }
+    public function getAvatar() {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT * FROM usertbl WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        if (isset ($rows['avatar'])) {
+            return $rows['avatar'];
+        } else {
+            return DEFAULT_IMG;
+        }
     }
 }
