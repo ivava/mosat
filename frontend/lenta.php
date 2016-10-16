@@ -26,7 +26,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="#">Новинки</a></li>
 					<li><a href="#">Топ 100</a></li>
-					<li class="active"><a href="lenta.html">Лента</a></li>
+					<li class="active"><a href="lenta.php">Лента</a></li>
 					<li><a href="#">Плейлист</a></li>
 					<li><a href="download.html">Загрузить</a></li>
 					<li><a href="#">Search</a></li>
