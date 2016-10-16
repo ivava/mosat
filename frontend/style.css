@@ -98,3 +98,141 @@ span.user-stats {
 .reg_form {
 	width: 20%;
 }
+ul.user-info {
+	border-bottom: none;
+	margin-top: 5%;
+	margin-left: 1%;
+	margin-bottom: 5%;
+}
+ul.user-info li{
+	margin-bottom: 0 !important;
+	border: 0 !important;
+}
+
+ul.user-info li a{
+	padding: 3px 30px;
+	font-family: 'Open Sans', sans-serif;
+	border-radius: 3px !important;
+	font-size: 16px;
+	text-decoration: none !important;
+	border: 0 !important;
+}
+
+ul.user-info>li.active {
+	border-bottom: none !important;
+}
+
+ul.user-info>li.active a {
+	border: 0 !important;
+	background-color: rgb(77,134,219);
+	color: #fff !important;
+}
+ul.user-info>li.active a:hover {
+	border: 0 !important;
+	background-color: rgb(77,134,219);
+}
+ul.user-info>li.active a:focus {
+	border: 0 !important;
+	background-color: rgb(77,134,219);
+	color: #fff !important;
+}
+
+ul.user-info>li a:hover {
+	border: 0 !important;
+	background-color: transparent;
+
+}
+
+img.album-logo {
+	height: 150px;
+	width: 150px;
+}
+
+p.album-author, p.album-title {
+	font-family: 'Open Sans', sans-serif;
+}
+
+p.album-author {
+	font-size: 14px;
+}
+p.album-title {
+	font-weight: bold;
+	font-size: 16px;
+}
+
+div.lenta {
+	max-width: 500px;
+}
+
+img.user-prev-avatar {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+img.comment-prev-avatar {
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+}
+
+img.full-album-logo {
+	width: 100%;
+	height: auto
+}
+
+div.post {
+	border: 1px solid lightgray;
+}
+
+div.author-post-info {
+	padding: 10px;
+}
+
+p.post-time {
+	color: #999;
+}
+
+p.post-album-title {
+	font-size: 18px;
+}
+
+p.post-genre-album {
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+
+span.comment-date {
+	color: lightgray;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.comment-author {
+	font-weight: bold;
+}
+
+p>a {
+	color: #000;
+}
+p>a:hover {
+	text-decoration: none;
+}
+.album-logo {
+	position: relative;
+
+}
+
+.btn-play {
+	height: 150px;
+	width: 150px;
+	border-radius: 50%;
+	position: absolute;
+	bottom: 35%;
+	right: 34%;
+}
+
+.album-logo:hover .btn-play {
+	background-color: rgba(0,0,0,0.4);
+	transition: all 0.1s;
+}
