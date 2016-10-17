@@ -31,7 +31,7 @@ session_start();
                 <li><a href="#">Топ 100</a></li>
                 <li><a href="#">Лента</a></li>
                 <li><a href="#">Плейлист</a></li>
-                <li class="active"><a href="#">Загрузить</a></li>
+                <li class="active"><a href="download.php">Загрузить</a></li>
                 <li><a href="#">Search</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -44,7 +44,9 @@ session_start();
                             echo $_SESSION['session_username'] . "<b class=\"caret\"></b>";
                         ?>
                             <ul class="dropdown-menu">
+                                <li><a href="user.php">Профиль</a></li>
                                 <li><a href="logout.php">Выйти</a></li>
+
                             </ul>
                        <?php } else {
                             echo "Вход/регистрация<b class=\"caret\"></b>";

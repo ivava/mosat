@@ -12,10 +12,20 @@ class Music
     public $path;
     public $title;
     public $user_id;
+    public $thumb;
     public $timeLine = array();
 
 
 
+
+    public function setParamert($id, $path, $title, $user_id, $thumb = '')
+    {
+        $this->id = $id;
+        $this->path = $path;
+        $this->title = $title;
+        $this->user_id = $user_id;
+        $this->thumb = $thumb;
+    }
 //добавление в бд ин-фы о музыке
 //  public function insert() {
 //      if (!is_null($this->id)) {
@@ -52,5 +62,31 @@ class Music
       $st->execute();
       $this->id = $connect->lastInsertId();
       $connect = null;
+      return $this;
   }
+  public function uploadThumb($id, $photo) {
+      $path = "../user_file/thumb/";
+
+      $uploadFile = $path . basename($photo['name']);
+      if (move_uploaded_file($photo['tmp_name'], $uploadFile)) {
+          $this->thumb = $uploadFile;
+      }
+      $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+      $sql = "UPDATE music
+        SET thumb='".$this->thumb."'
+         WHERE id='".$id."'";
+
+      $st = $connect->prepare($sql);
+      $st->bindValue(":thumb", $this->thumb, PDO::PARAM_STR);
+      $st->execute();
+      $connect = null;
+  }
+    public static function getMusicByUserId($userId) {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT * FROM music WHERE user_id='".$userId."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        return $rows;
+    }
 }

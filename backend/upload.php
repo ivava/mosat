@@ -11,6 +11,11 @@ include ("config.php");
 $user = User::getUserByUsername($_SESSION['session_username']);
 $music = new Music();
 $music->uploadFile($user->id, $_FILES['music_file']);
-echo $user->id;
-echo $_SESSION['session_username'];
+//$music->uploadThumb($music->id, $_FILES['music_thumb']);
+$_SESSION['music_id'] = $music->id;
+$_SESSION['music_title'] = $music->title;
+$SESSION['music_path'] = $music->path;
+$_SESSION['music_user_id'] = $music->user_id;
+$_SESSION['music_thumb'] = $music->thumb;
+header("Location: ../frontend/download.php");
 ?>

@@ -8,3 +8,5 @@ CREATE TABLE `music` (
 PRIMARY KEY  (`id`),
 UNIQUE KEY `title` (`title`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
++thumb

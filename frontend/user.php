@@ -1,6 +1,7 @@
 <?php
 include ("templates/header.php");
 require ("../backend/classes/User.php");
+require ("../backend/classes/Music.php");
 require ("../backend/config.php");
 $user = User::getUserByUsername($_SESSION['session_username']);
 ?>
@@ -9,7 +10,7 @@ $user = User::getUserByUsername($_SESSION['session_username']);
 	<div class="row">
 		<div class="col-md-3">
 			<img src="<?php
-				echo $user->getAvatar();
+				echo $user->getAvatar() . ".jpg";
 ?>
 " alt="" class="user-avatar">
 		</div>
@@ -43,7 +44,11 @@ $user = User::getUserByUsername($_SESSION['session_username']);
 		<li><a data-toggle="tab" href="#panel2">Понравившиеся</a></li>
 		<li><a data-toggle="tab" href="#panel3">Биография</a></li>
 	</ul>
-
+	<?php
+		$rows = Music::getMusicByUserId($user->id);
+		$music = new Music();
+		$music->setParamert($rows['id'], $rows['path'], $rows['title'], $rows['user_id']);
+	?>
 	<div class="tab-content">
 		<div id="panel1" class="tab-pane fade in active">
 			<div class="row">
@@ -55,7 +60,10 @@ $user = User::getUserByUsername($_SESSION['session_username']);
 				<div class="col-md-3">
 					<img src="assets/img/2.jpg" class="album-logo">
 
-					<p class="album-title">Rendered Thoughts</p>
+					<p class="album-title"><?php
+						echo $music->title;
+					?>
+					</p>
 					<p class="album-author">Optic</p>
 				</div>
 				<div class="col-md-3">
