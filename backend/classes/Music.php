@@ -80,6 +80,7 @@ class Music
       $st->bindValue(":thumb", $this->thumb, PDO::PARAM_STR);
       $st->execute();
       $connect = null;
+      return $this->thumb;
   }
     public static function getMusicByUserId($userId) {
         $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);

@@ -8,14 +8,20 @@
 //}
 session_start();
 include ("config.php");
-$user = User::getUserByUsername($_SESSION['session_username']);
-$music = new Music();
-$music->uploadFile($user->id, $_FILES['music_file']);
-//$music->uploadThumb($music->id, $_FILES['music_thumb']);
-$_SESSION['music_id'] = $music->id;
-$_SESSION['music_title'] = $music->title;
-$SESSION['music_path'] = $music->path;
-$_SESSION['music_user_id'] = $music->user_id;
-$_SESSION['music_thumb'] = $music->thumb;
+if (!isset($_SESSION['music_id'])) {
+    $user = User::getUserByUsername($_SESSION['session_username']);
+    $music = new Music();
+    $music->uploadFile($user->id, $_FILES['music_file']);
+
+    $_SESSION['music_id'] = $music->id;
+    $_SESSION['music_title'] = $music->title;
+    $_SESSION['music_path'] = $music->path;
+    $_SESSION['music_user_id'] = $music->user_id;
+} else {
+    $music = new Music();
+    $music_thumb = $music->uploadThumb($_SESSION['music_id'], $_FILES['music_thumb']);
+
+    $_SESSION['music_thumb'] = $music_thumb;
+}
 header("Location: ../frontend/download.php");
 ?>

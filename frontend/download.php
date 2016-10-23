@@ -10,11 +10,23 @@ require ("../backend/classes/Music.php");
 		<form action="../backend/upload.php" method="post" enctype="multipart/form-data" id="downloadMusic">
 			<input type="hidden" name="MAX_FILE_SIZE" value="160000000">
 			<input type="file" value="Загрузить с компьютера" class="btn btn-primary btn-lg download-music" name="music_file">
-<!--			<input type="file" value="Загрузить с компьютера" class="btn btn-primary btn-lg download-music" name="music_thumb">-->
-<!--			<input type="text" value="music_name">-->
+			<!--			<input type="file" value="Загрузить с компьютера" class="btn btn-primary btn-lg download-music" name="music_thumb">-->
+			<!--			<input type="text" value="music_name">-->
 			<input type="submit" value="dow">
 		</form>
 
+		<?php
+
+			?>
+
+			<form action="../backend/upload.php" method="post" enctype="multipart/form-data" id="downloadMusic">
+				<input type="hidden" name="MAX_FILE_SIZE" value="160000000">
+				<input type="file" value="Загрузить с компьютера" class="btn btn-primary btn-lg download-music"
+					   name="music_thumb">
+				<input type="submit" value="dow">
+			</form>
+			<?php
+		?>
 
 		<?php
 		if (isset($_SESSION['music_id'])) {
@@ -30,11 +42,16 @@ require ("../backend/classes/Music.php");
 					?>
 "
 				</div>
-				<audio src="
-<?php
-				echo $music->path;
-			?>
-"
+				<audio controls>
+					<source src="
+					<?php
+					echo $music->path;
+					?>
+
+" type="audio/mpeg">
+
+
+					   ></audio>
 			</div>
 			<div class="music_title">
 				<span>
