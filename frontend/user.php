@@ -4,13 +4,14 @@ require ("../backend/classes/User.php");
 require ("../backend/classes/Music.php");
 require ("../backend/config.php");
 $user = User::getUserByUsername($_SESSION['session_username']);
+$musicList = Music::getMusicByUserId($user->id);
 ?>
 
 <div class="container">
 	<div class="row">
 		<div class="col-md-3">
 			<img src="<?php
-				echo $user->getAvatar() . ".jpg";
+				echo $user->getAvatar();
 ?>
 " alt="" class="user-avatar">
 		</div>
@@ -44,64 +45,71 @@ $user = User::getUserByUsername($_SESSION['session_username']);
 		<li><a data-toggle="tab" href="#panel2">Понравившиеся</a></li>
 		<li><a data-toggle="tab" href="#panel3">Биография</a></li>
 	</ul>
-	<?php
-		$rows = Music::getMusicByUserId($user->id);
-		$music = new Music();
-		$music->setParamert($rows['id'], $rows['path'], $rows['title'], $rows['user_id']);
-	?>
 	<div class="tab-content">
 		<div id="panel1" class="tab-pane fade in active">
 			<div class="row">
-				<div class="col-md-3">
-					<img src="assets/img/1.jpg" class="album-logo">
-					<p class="album-title">Light Trails</p>
-					<p class="album-author">Gradient</p>
-				</div>
-				<div class="col-md-3">
-					<img src="assets/img/2.jpg" class="album-logo">
-
-					<p class="album-title"><?php
-						echo $music->title;
+				<?php
+				foreach ($musicList as $music) {
 					?>
-					</p>
-					<p class="album-author">Optic</p>
-				</div>
-				<div class="col-md-3">
-					<img src="assets/img/3.jpg" class="album-logo">
-
-					<p class="album-title">Dubism EP </p>
-					<p class="album-author">Upwellings</p>
-				</div>
-				<div class="col-md-3">
-					<img src="assets/img/4.jpg" class="album-logo">
-
-					<p class="album-title">Moment To Dub EP</p>
-					<p class="album-author">Axs</p>
-				</div>
-				<div class="col-md-3">
-					<img src="assets/img/5.jpg" class="album-logo">
-
-					<p class="album-title">Singularity</p>
-					<p class="album-author">Dublicator</p>
-				</div>
-				<div class="col-md-3">
-					<img src="assets/img/6.jpg" class="album-logo">
-
-					<p class="album-title">Leo Triplet EP</p>
-					<p class="album-author">Inn-R</p>
-				</div>
-				<div class="col-md-3">
-					<img src="assets/img/7.jpg" class="album-logo">
-
-					<p class="album-title">Sedative</p>
-					<p class="album-author">Mr. Cloudy</p>
-				</div>
-				<div class="col-md-3">
-					<img src="assets/img/8.jpg" class="album-logo">
-
-					<p class="album-title">Pano EP</p>
-					<p class="album-author">TRP</p>
-				</div>
+					<div class="col-md-3">
+						<img src="
+<?php
+						echo $musicList['thumb'];
+					?>
+					" class="album-logo">
+						<p class="album-title"><?php
+					echo $musicList['title'];
+							?></p>
+						<p class="album-author">Gradient</p>
+					</div>
+					<?php
+				} echo print_r($musicList);
+				?>
+<!--				<div class="col-md-3">-->
+<!--					<img src="assets/img/2.jpg" class="album-logo">-->
+<!---->
+<!--					<p class="album-title">--><?php
+//						echo $music->title;
+//					?>
+<!--					</p>-->
+<!--					<p class="album-author">Optic</p>-->
+<!--				</div>-->
+<!--				<div class="col-md-3">-->
+<!--					<img src="assets/img/3.jpg" class="album-logo">-->
+<!---->
+<!--					<p class="album-title">Dubism EP </p>-->
+<!--					<p class="album-author">Upwellings</p>-->
+<!--				</div>-->
+<!--				<div class="col-md-3">-->
+<!--					<img src="assets/img/4.jpg" class="album-logo">-->
+<!---->
+<!--					<p class="album-title">Moment To Dub EP</p>-->
+<!--					<p class="album-author">Axs</p>-->
+<!--				</div>-->
+<!--				<div class="col-md-3">-->
+<!--					<img src="assets/img/5.jpg" class="album-logo">-->
+<!---->
+<!--					<p class="album-title">Singularity</p>-->
+<!--					<p class="album-author">Dublicator</p>-->
+<!--				</div>-->
+<!--				<div class="col-md-3">-->
+<!--					<img src="assets/img/6.jpg" class="album-logo">-->
+<!---->
+<!--					<p class="album-title">Leo Triplet EP</p>-->
+<!--					<p class="album-author">Inn-R</p>-->
+<!--				</div>-->
+<!--				<div class="col-md-3">-->
+<!--					<img src="assets/img/7.jpg" class="album-logo">-->
+<!---->
+<!--					<p class="album-title">Sedative</p>-->
+<!--					<p class="album-author">Mr. Cloudy</p>-->
+<!--				</div>-->
+<!--				<div class="col-md-3">-->
+<!--					<img src="assets/img/8.jpg" class="album-logo">-->
+<!---->
+<!--					<p class="album-title">Pano EP</p>-->
+<!--					<p class="album-author">TRP</p>-->
+<!--				</div>-->
 			</div>
 		</div>
 		<div id="panel2" class="tab-pane fade">
