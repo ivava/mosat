@@ -16,9 +16,10 @@ class User
     public $avatar;
     public $userList = array();
     public $musicList = array();
+    public $friends_list = array();
 
 
-    public function __construct($fullName, $login, $mail, $password, $id)
+    public function __construct($fullName, $login, $mail, $password, $id, $friend_list = '')
     {
         $this->fullName = $fullName;
         $this->login = $login;
@@ -82,7 +83,8 @@ class User
             $st = $connect->prepare($sql);
             $st->execute();
             $rows = $st->fetch(PDO::FETCH_ASSOC);
-            return new User($rows['full_name'], $rows['username'], $rows['email'], $rows['password'], $rows['id']);
+            return new User($rows['full_name'], $rows['username'], $rows['email'], $rows['password'], $rows['id'],
+                $rows['friend_list']);
     }
     public function addMusicList($link) {
         $this->musicList[] = $link;
@@ -120,5 +122,42 @@ class User
         } else {
             return DEFAULT_IMG;
         }
+    }
+    public function getMusicList() {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "
+        
+        SELECT * FROM music
+        WHERE user_id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+    public function getFriend_list() {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT * FROM usertbl WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        return unserialize($rows['friend_list']);
+    }
+    public function addFriend($friendId) {
+        $this->friends_list = $this->getFriend_list();
+        $this->friends_list[] = $friendId;
+        $str = serialize($this->friends_list);
+
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE usertbl
+                SET friend_list='".$str."'
+                 WHERE id='".$this->id."'
+                ";
+        $st = $connect->prepare($sql);
+        $st->bindValue(":friend_list", $str, PDO::PARAM_STR);
+        $st->execute();
+        $connect = null;
+    }
+    public function getFriends() {
+
     }
 }

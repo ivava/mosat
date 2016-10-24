@@ -11,3 +11,4 @@ UNIQUE KEY `username` (`username`)
 
 
 + avatar
++ friend_list

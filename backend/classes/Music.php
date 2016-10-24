@@ -90,4 +90,5 @@ class Music
         $rows = $st->fetch(PDO::FETCH_ASSOC);
         return $rows;
     }
+
 }

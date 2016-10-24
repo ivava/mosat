@@ -29,7 +29,7 @@ session_start();
             <ul class="nav navbar-nav">
                 <li><a href="#">Новинки</a></li>
                 <li><a href="#">Топ 100</a></li>
-                <li><a href="#">Лента</a></li>
+                <li><a href="lenta.php">Лента</a></li>
                 <li><a href="#">Плейлист</a></li>
                 <li class="active"><a href="download.php">Загрузить</a></li>
                 <li><a href="#">Search</a></li>

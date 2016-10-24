@@ -4,7 +4,7 @@ require ("../backend/classes/User.php");
 require ("../backend/classes/Music.php");
 require ("../backend/config.php");
 $user = User::getUserByUsername($_SESSION['session_username']);
-$musicList = Music::getMusicByUserId($user->id);
+$musicList = $user->getMusicList();
 ?>
 
 <div class="container">
@@ -49,21 +49,23 @@ $musicList = Music::getMusicByUserId($user->id);
 		<div id="panel1" class="tab-pane fade in active">
 			<div class="row">
 				<?php
-				foreach ($musicList as $music) {
+				$musicListCount = count($musicList);
+				for ($i = 0; $i < $musicListCount; $i++) {
+					if ($i > 8) break;
 					?>
 					<div class="col-md-3">
 						<img src="
 <?php
-						echo $musicList['thumb'];
+						echo $musicList[$i]['thumb'];
 					?>
 					" class="album-logo">
 						<p class="album-title"><?php
-					echo $musicList['title'];
+					echo $musicList[$i]['title'];
 							?></p>
 						<p class="album-author">Gradient</p>
 					</div>
 					<?php
-				} echo print_r($musicList);
+				}
 				?>
 <!--				<div class="col-md-3">-->
 <!--					<img src="assets/img/2.jpg" class="album-logo">-->
