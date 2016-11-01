@@ -62,7 +62,7 @@ $musicList = $user->getMusicList();
 						<p class="album-title"><?php
 					echo $musicList[$i]['title'];
 							?></p>
-						<p class="album-author">Gradient</p>
+						<p class="album-author">AURTOR</p>
 					</div>
 					<?php
 				}

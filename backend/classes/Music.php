@@ -14,6 +14,8 @@ class Music
     public $user_id;
     public $thumb;
     public $timeLine = array();
+    public $author;
+
 
 
 
@@ -89,6 +91,16 @@ class Music
         $st->execute();
         $rows = $st->fetch(PDO::FETCH_ASSOC);
         return $rows;
+    }
+    public static function getMusicById($id) {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT * FROM music WHERE id='".$id."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        $music = new Music();
+        $music->setParamert($id, $rows['path'], $rows['title'], $rows['thumb']);
+        return $music;
     }
 
 }

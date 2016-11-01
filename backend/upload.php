@@ -8,7 +8,8 @@
 //}
 session_start();
 include ("config.php");
-if ($_SESSION['upload'] != 'upload') {
+if ($_SESSION['upload'] == '') {
+
     $user = User::getUserByUsername($_SESSION['session_username']);
     $music = new Music();
     $music->uploadFile($user->id, $_FILES['music_file']);
@@ -18,13 +19,14 @@ if ($_SESSION['upload'] != 'upload') {
     $_SESSION['music_path'] = $music->path;
     $_SESSION['music_user_id'] = $music->user_id;
     $_SESSION['upload'] = 'upload';
-} else {
-    $music = new Music();
-    $music_thumb = $music->uploadThumb($_SESSION['music_id'], $_FILES['music_thumb']);
-
-    $_SESSION['music_thumb'] = $music_thumb;
-    $_SESSION['upload'] = 'upload_thumb';
 }
-header("Location: ../frontend/download.php");
+
+if (isset($_GET['done'])) {
+    $_SESSION['upload'] = '';
+    header("Location: ../frontend/mosat.php");
+} else {
+    $_SESSION['upload'] = '';
+    header("Location: ../frontend/download.php");
+}
 
 ?>
