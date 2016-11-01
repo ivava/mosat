@@ -102,5 +102,10 @@ class Music
         $music->setParamert($id, $rows['path'], $rows['title'], $rows['thumb']);
         return $music;
     }
+    public static function getAllMusicCount() {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $id = $connect->lastInsertId();
+        return $id;
+    }
 
 }

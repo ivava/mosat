@@ -157,7 +157,5 @@ class User
         $st->execute();
         $connect = null;
     }
-    public function getFriends() {
 
-    }
 }
