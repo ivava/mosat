@@ -104,8 +104,10 @@ class Music
     }
     public static function getAllMusicCount() {
         $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-        $id = $connect->lastInsertId();
+        $sql = "SELECT id FROM music";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $id = $st->fetch(PDO::FETCH_ASSOC);
         return $id;
     }
-
 }
