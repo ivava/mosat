@@ -15,7 +15,7 @@ if (!empty($_POST['full_name']) && !empty($_POST['email']) && !empty($_POST['use
     $password = htmlspecialchars($_POST['password']);
    $user = new User($full_name, $username, $email, $password);
     $ins = $user->insert();
-//    $user->insert();
+
     if ($ins == FALSE) {
         echo "Ошибка";
     } else {

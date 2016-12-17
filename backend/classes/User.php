@@ -17,15 +17,17 @@ class User
     public $userList = array();
     public $musicList = array();
     public $friends_list = array();
+    public $bio;
 
 
-    public function __construct($fullName, $login, $mail, $password, $id, $friend_list = '')
+    public function __construct($fullName, $login, $mail, $password, $id, $friend_list = '', $bio)
     {
         $this->fullName = $fullName;
         $this->login = $login;
         $this->email = $mail;
         $this->password = $password;
         $this->id = $id;
+        $this->bio = $bio;
     }
     // Возвращает список друзей для текущего ползователя, массив содержит обькты User
     public function getUserList() {
@@ -84,7 +86,7 @@ class User
             $st->execute();
             $rows = $st->fetch(PDO::FETCH_ASSOC);
             return new User($rows['full_name'], $rows['username'], $rows['email'], $rows['password'], $rows['id'],
-                $rows['friend_list']);
+                $rows['friend_list'], $rows['bio']);
     }
     public function addMusicList($link) {
         $this->musicList[] = $link;
@@ -157,5 +159,32 @@ class User
         $st->execute();
         $connect = null;
     }
+    public function setBio($bio) {
+        $this->bio = $bio;
+    }
+    public function insertBio($value) {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE usertbl
+        SET bio='".$value."'
+         WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->bindValue(":bio", $value, PDO::PARAM_STR);
+        $st->execute();
+        $connect = null;
+        $this->bio = $value;
+    }
+    public function updateFullName($value) {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE usertbl
+        SET full_name='".$value."'
+         WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->bindValue(":full_name", $value, PDO::PARAM_STR);
+        $st->execute();
+        $connect = null;
+        $this->fullName = $value;
+
+    }
+
 
 }

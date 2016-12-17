@@ -25,7 +25,7 @@ $musicList = $user->getMusicList();
 					<?php
 					echo $user->login;
 ?></p>
-					<p><a class="btn btn-primary btn-lg user-subscribe" role="button">Редактировать</a></p>
+					<p><a class="btn btn-primary btn-lg user-subscribe" role="button" href="edit_user.php">Редактировать</a></p>
 					<form action="../backend/setAvatar.php" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="MAX_FILE_SIZE" value="160000000">
 						<input type="file" value="Загрузить" name="avatar">
@@ -160,7 +160,7 @@ $musicList = $user->getMusicList();
 		</div>
 		<div id="panel3" class="tab-pane fade">
 			<h3>Биография</h3>
-			<p>Кого?</p>
+			<p><?= $user->bio ?></p>
 		</div>
 	</div>
 </div>
