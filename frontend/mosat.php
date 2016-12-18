@@ -1,7 +1,7 @@
 <?php
 include ("templates/header.php");
-require ("../backend/config.php");
-require ("../backend/classes/User.php");
+//require ("../backend/config.php");
+//require ("../backend/classes/User.php");
 require ("../backend/classes/Music.php");
 $user = User::getUserByUsername($_SESSION['session_username']);
 $music = Music::getMusicById($_SESSION['music_id']);

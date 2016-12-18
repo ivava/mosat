@@ -1,9 +1,9 @@
 <?php
 include ('templates/header.php');
 
-require ('../backend/config.php');
+//require ('../backend/config.php');
 require ('../backend/classes/Music.php');
-require ('../backend/classes/User.php');
+//require ('../backend/classes/User.php');
 ?>
 <div class="container">
     <div class="row">

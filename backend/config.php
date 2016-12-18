@@ -8,7 +8,7 @@ define("DB_USERNAME", "root");
 define("DB_PASSWORD", "");
 define("CLASS_PATH", "backend/classes");
 define("ERROR_DB", "Не удалось подключиться к бд");
-define("DEFAULT_IMG", "assets/img/test.png");
+define("DEFAULT_IMG", "assets/img/default.png");
 
 // autoload
 spl_autoload_register(function($class_name) {
