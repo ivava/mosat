@@ -25,7 +25,7 @@ for ($i = 1; $i < 10; $i++) {
         </div>
         <div class="music_title">
             <span>
-                <? echo $music->title ?>
+                <?php echo $music->title ?>
             </span>
         </div>
         <div class="music_master">
