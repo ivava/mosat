@@ -26,7 +26,7 @@ if (isset($_GET['done'])) {
     header("Location: ../frontend/mosat.php");
 } else {
     $_SESSION['upload'] = '';
-    header("Location: ../frontend/download.php");
+    header("Location: ../frontend/edit_audio.php");
 }
 
 ?>

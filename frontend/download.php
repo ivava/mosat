@@ -28,12 +28,7 @@ if (!isset($_SESSION['upload'])) {
 		}
 			?>
 
-			<form action="../backend/upload_thumb.php" method="post" enctype="multipart/form-data" id="downloadMusic">
-				<input type="hidden" name="MAX_FILE_SIZE" value="160000000">
-				<input type="file" value="Загрузить с компьютера" class="btn btn-primary btn-lg download-music"
-					   name="music_thumb">
-				<input type="submit" value="dow">
-			</form>
+
 			<?php
 			if (isset($_SESSION['music_id'])) {
 				$music = new Music();

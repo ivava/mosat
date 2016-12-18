@@ -53,7 +53,11 @@ class Music
       if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
           $this->user_id = $userId;
           $this->path = $uploadFile;
-          $this->title = $file['name'];
+
+          $auObj = new Audio();
+          $auObj->loadFile($this->path);
+          $auObj->id3_title;
+          $this->title = $auObj->id3_title;;
       }
       $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
       $sql = "INSERT INTO music (user_id, title, path) VALUES (:user_id, :title, :path)";
