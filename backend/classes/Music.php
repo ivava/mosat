@@ -128,4 +128,29 @@ class Music
         $this->title = $value;
         return $this;
     }
+    public function updateAuthor($value) {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE music
+        SET author='".$value."'
+         WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->bindValue(":author", $value, PDO::PARAM_STR);
+        $st->execute();
+        $connect = null;
+        $this->author = $value;
+        return $this;
+    }
+    private function getAuthorFromBd() {
+        $connect = new PDO (DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT author FROM music WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        $this->author = $rows['author'];
+    }
+    public function getMusicAuthor() {
+        $this->getAuthorFromBd();
+        return $this->author;
+    }
+
 }

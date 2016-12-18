@@ -2,6 +2,7 @@
 include ('templates/header.php');
 require ('../backend/classes/Music.php');
 //require ('../backend/config.php');
+
 $music = Music::getMusicById($_SESSION['music_id']);
 ?>
 <form action="../backend/editAudio.php" method="post">
@@ -20,6 +21,7 @@ $music = Music::getMusicById($_SESSION['music_id']);
     <span class="max_val"></span>
 </form>
 
-<?=$music->title?>
+<?=$music->title?> <br />
+<?=$music->getMusicAuthor()?>
 <script src="js/cropMusic/range.js"></script>
-<?php print_r($_SESSION)?>
+<?php //print_r($_SESSION)?>
