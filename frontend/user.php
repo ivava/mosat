@@ -1,8 +1,8 @@
 <?php
 include ("templates/header.php");
-require ("../backend/classes/User.php");
+//require ("../backend/classes/User.php");
 require ("../backend/classes/Music.php");
-require ("../backend/config.php");
+//require ("../backend/config.php");
 $user = User::getUserByUsername($_SESSION['session_username']);
 $musicList = $user->getMusicList();
 ?>
@@ -21,16 +21,10 @@ $musicList = $user->getMusicList();
 					<h3 class="username"><?php
 						echo $user->fullName;
 					?></h3>
-					<p class="userlogin">@
-					<?php
+					<p class="userlogin">@<?php
 					echo $user->login;
 ?></p>
 					<p><a class="btn btn-primary btn-lg user-subscribe" role="button" href="edit_user.php">Редактировать</a></p>
-					<form action="../backend/setAvatar.php" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="MAX_FILE_SIZE" value="160000000">
-						<input type="file" value="Загрузить" name="avatar">
-						<input type="submit" value="1">
-					</form>
 				</div>
 			</div>
 			<div class="row">

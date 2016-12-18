@@ -6,9 +6,8 @@ CREATE TABLE `usertbl` (
 `password` varchar(32) collate utf8_unicode_ci NOT NULL default '',
 `avatar` varchar(64) collate utf8_unicode_ci NOT NULL default '',
 `friend_list` varchar(128) collate utf8_unicode_ci NOT NULL default '',
-'bio' VARCHAR(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+`bio` varchar(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
 PRIMARY KEY  (`id`),
 UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 
