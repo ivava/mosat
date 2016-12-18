@@ -54,10 +54,11 @@ class Music
           $this->user_id = $userId;
           $this->path = $uploadFile;
 
-          $auObj = new Audio();
-          $auObj->loadFile($this->path);
-          $auObj->id3_title;
-          $this->title = $auObj->id3_title;
+//          $auObj = new Audio();
+//          $auObj->loadFile($this->path);
+//          $auObj->id3_title;
+//          $this->title = $auObj->id3_title;
+          $this->title = $this->path;
       }
       $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
       $sql = "INSERT INTO music (user_id, title, path) VALUES (:user_id, :title, :path)";
@@ -113,5 +114,18 @@ class Music
         $st->execute();
         $id = $st->fetch(PDO::FETCH_ASSOC);
         return $id;
+    }
+    public function updateTitle($value) {
+
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE music
+        SET title='".$value."'
+         WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->bindValue(":title", $value, PDO::PARAM_STR);
+        $st->execute();
+        $connect = null;
+        $this->title = $value;
+        return $this;
     }
 }
