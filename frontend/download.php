@@ -4,6 +4,7 @@ require ("../backend/classes/Music.php");
 if (!isset($_SESSION['upload'])) {
 	$_SESSION['upload'] = '';
 }
+$_SESSION['music_id'] = '';
 ?>
 	<div class="container text-center">
         <?php
@@ -15,7 +16,7 @@ if (!isset($_SESSION['upload'])) {
                 <div class="file_upload">
                     <button type="button" class="btn btn-primary btn-lg ">Загрузить с компьютера</button>
                     <div>Файл не выбран</div>
-                    <input type="file" name="music_file">
+                    <input type="file" name="music_file" required>
                 </div>
                 <input type="submit" value="dow">
 			</form>
@@ -25,34 +26,34 @@ if (!isset($_SESSION['upload'])) {
 			?>
 
 
-			<?php
-			if (isset($_SESSION['music_id'])) {
-				$music = new Music();
-				$music->setParamert($_SESSION['music_id'], $_SESSION['music_path'], $_SESSION['music_title'], $_SESSION['music_user_id']);
-				?>
-				<div class="audio_item">
-					<audio controls>
-						<source src="
-					<?php
-						echo $music->path;
-						?>
-
-" type="audio/mpeg">
-
-
-						>
-					</audio>
-				</div>
-				<div class="music_title">
-				<span>
-					<?php
-					echo $music->title;
-					?>
-				</span>
-				</div>
-				<?php
-
-		}
+<!--			--><?php
+//			if (isset($_SESSION['music_id'])) {
+//				$music = new Music();
+//				$music->setParamert($_SESSION['music_id'], $_SESSION['music_path'], $_SESSION['music_title'], $_SESSION['music_user_id']);
+//				?>
+<!--				<div class="audio_item">-->
+<!--					<audio controls>-->
+<!--						<source src="-->
+<!--					--><?php
+//						echo $music->path;
+//						?>
+<!---->
+<!--" type="audio/mpeg">-->
+<!---->
+<!---->
+<!--						>-->
+<!--					</audio>-->
+<!--				</div>-->
+<!--				<div class="music_title">-->
+<!--				<span>-->
+<!--					--><?php
+//					echo $music->title;
+//					?>
+<!--				</span>-->
+<!--				</div>-->
+<!--				--><?php
+//
+//		}
 		?>
 		<?php
 		if ($_SESSION['upload'] == 'upload_thumb') {

@@ -104,7 +104,7 @@ class Music
         $st->execute();
         $rows = $st->fetch(PDO::FETCH_ASSOC);
         $music = new Music();
-        $music->setParamert($id, $rows['path'], $rows['title'], $rows['thumb']);
+        $music->setParamert($id, $rows['path'], $rows['title'], $rows['user_id'], $rows['thumb']);
         return $music;
     }
     public static function getAllMusicCount() {
@@ -151,6 +151,18 @@ class Music
     public function getMusicAuthor() {
         $this->getAuthorFromBd();
         return $this->author;
+    }
+    private function getThumbByBd() {
+        $connect = new PDO (DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT thumb FROM music WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        $this->thumb = $rows['thumb'];
+    }
+    public function getMusicThumb() {
+        $this->getThumbByBd();
+        return $this->thumb;
     }
 
 }

@@ -23,5 +23,8 @@ $music = Music::getMusicById($_SESSION['music_id']);
 
 <?=$music->title?> <br />
 <?=$music->getMusicAuthor()?>
+<?php if (isset($music->thumb)) { ?>
+    <img src="<?=$music->thumb?>" />
+<?php } ?>
 <script src="js/cropMusic/range.js"></script>
 <?php //print_r($_SESSION)?>

@@ -7,6 +7,6 @@ $music_thumb = $music->uploadThumb($_SESSION['music_id'], $_FILES['music_thumb']
 
 $_SESSION['music_thumb'] = $music_thumb;
 $_SESSION['upload'] = 'upload_thumb';
-header("Location: ../frontend/download.php")
+header("Location: ../frontend/edit_audio.php");
 
 ?>

@@ -8,33 +8,40 @@ require ('../backend/classes/Music.php');
 <div class="container">
     <div class="row">
 <?php
+$user = User::getUserByUsername($_SESSION['session_username']);
+
 $musicCount = Music::getAllMusicCount();
-print_r($musicCount);
 
 
-for ($i = 1; $i < 10; $i++) {
-    if ($i > 8) break;
+for ($i = 1; $i < 100; $i++) {
+//    if ($i > 8) break;
     $music = Music::getMusicById($i);
-    $friendUser = User::getUserById($music->user_id);
+    $friendUser = User::getUserByIdObj($music->user_id);
+
+//    $friendUser = new User($rows['full_name'], $rows['username'], $rows['email'], $rows['password'], $rows['id'],
+//        $rows['friend_list']s['bio']);
+
+//    $friendUser = User::getUserByUsername($friendUser['login']);, $row
     ?>
     <div class="col-md-4">
         <div class="music_thumb">
-            <img src="
-<?php echo $music->thumb ?>
-" class="img-responsive"
+            <img src="<?=$music->getMusicThumb()?>" class="img-responsive"/>
         </div>
         <div class="music_title">
+            <a href=<?="mosat.php?id=" . $music->id ?> >
             <span>
                 <?php echo $music->title ?>
             </span>
+                </a>
+            <span><?=$music->author?></span>
         </div>
         <div class="music_master">
             <a href="
 <?php
-     echo 'profile.php?id=' . $friendUser['id'];
+     echo 'user.php?id=' . $friendUser->id;
     ?>
 ">
-                <? echo $friendUser['login'] ?>
+                <?= $friendUser->login ?>
             </a>
             </div>
     </div>
@@ -44,4 +51,3 @@ for ($i = 1; $i < 10; $i++) {
 }
     ?>
 </div>
-    </div>

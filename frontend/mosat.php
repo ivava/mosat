@@ -4,7 +4,12 @@ include ("templates/header.php");
 //require ("../backend/classes/User.php");
 require ("../backend/classes/Music.php");
 $user = User::getUserByUsername($_SESSION['session_username']);
-$music = Music::getMusicById($_SESSION['music_id']);
+if (!$_GET['id']) {
+	$music = Music::getMusicById($_SESSION['music_id']);
+} else {
+	$music = Music::getMusicById($_GET['id']);
+}
+$masterUser = User::getUserByIdObj($music->user_id);
 
 
 
@@ -17,10 +22,10 @@ $music = Music::getMusicById($_SESSION['music_id']);
 		<div class="post">
 			<div class="row author-post-info">
 				<div class="col-md-1">
-					<img src="assets/img/avatar.jpg" alt="" class="user-prev-avatar">
+					<img src="<?=$masterUser->getAvatar()?>" alt="" class="user-prev-avatar">
 				</div>
 				<div class="col-md-8">
-					<p><a href="user.html">
+					<p><a href=<?='user.php?id=' . $masterUser->id?>>
 							<?php
 							echo $user->login;
 							?>
@@ -34,10 +39,25 @@ $music = Music::getMusicById($_SESSION['music_id']);
 				<div class="col-md-12 album-logo">
 					<img src="
 <?php
-					echo $_SESSION['music_thumb'];
+				echo $music->getMusicThumb();
 ?>
 " class="full-album-logo">
 					<div class="btn-play">
+						<div class="audio_item">-->
+								<audio controls>
+													<source src="<?php echo $music->path; ?>" type="audio/mpeg">
+
+
+													>
+												</audio>
+											</div>
+											<div class="music_title">
+											<span>
+												<?php
+												echo $music->title;
+												?>
+											</span>
+											</div>
 
 					</div>
 				</div>

@@ -21,7 +21,7 @@ $musicList = $user->getMusicList();
                 <div class="col-md-12">
                     <h3 class="username">
                         <form method="post" id="editFullName" action="../backend/editProfile.php">
-                            <input name="full_name full_name_edit" type="text" value="<?php echo $user->fullName ?>" />
+                            <input name="full_name" type="text" value="<?php echo $user->fullName ?>" />
                             <input class="btn btn-primary btn-lg user-subscribe edit_name" type="submit" value="Сохранить"/>
                     </h3>
 
@@ -49,9 +49,7 @@ $musicList = $user->getMusicList();
             <h3>Изменить биографию</h3>
             <p>
             <form action="../backend/editProfile.php" method="post" id="editBio">
-                <textarea name="bio" id="" cols="95" rows="10">
-                    <?=$user->bio?>
-                </textarea> <br>
+                <textarea name="bio" id="" cols="95" rows="10"><?=$user->bio?></textarea> <br>
                 <input class="btn btn-primary btn-lg user-subscribe save_bio" type="submit" value="Сохранить биографию" />
             </form>
     </p>

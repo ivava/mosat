@@ -79,6 +79,15 @@ class User
         $rows = $st->fetch(PDO::FETCH_ASSOC);
         return $rows;
     }
+    public static function getUserByIdObj($id) {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT * FROM usertbl WHERE id='".$id."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        return new User($rows['full_name'], $rows['username'], $rows['email'], $rows['password'], $rows['id'],
+            $rows['friend_list'], $rows['bio']);
+    }
     public static function getUserByUsername($username) {
         $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
             $sql = "SELECT * FROM usertbl WHERE username='".$username."'";

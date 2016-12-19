@@ -2,7 +2,7 @@
 //session_start();
 
 include ("templates/header.php");
-require ("../backend/config.php");
+//require ("../backend/config.php");
 
 if (!isset($_SESSION['session_username'])) {
     header("location: login.php");

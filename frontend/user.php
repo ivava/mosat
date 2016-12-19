@@ -3,7 +3,11 @@ include ("templates/header.php");
 //require ("../backend/classes/User.php");
 require ("../backend/classes/Music.php");
 //require ("../backend/config.php");
-$user = User::getUserByUsername($_SESSION['session_username']);
+if (!isset($_GET['id'])) {
+	$user = User::getUserByUsername($_SESSION['session_username']);
+} else {
+	$user = User::getUserByIdObj($_GET['id']);
+}
 $musicList = $user->getMusicList();
 ?>
 
