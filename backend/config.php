@@ -19,7 +19,7 @@ spl_autoload_register(function($class_name) {
 
 
 function handleExeption($exeption) {
-    echo "Упс";
+    echo $exeption;
     error_log($exeption->getMessage());
 };
 set_exception_handler('handleExeption');

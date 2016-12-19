@@ -1,5 +1,6 @@
 <?php
 include ("templates/header.php");
+require ("../backend/classes/Comment.php");
 //require ("../backend/config.php");
 //require ("../backend/classes/User.php");
 require ("../backend/classes/Music.php");
@@ -10,6 +11,9 @@ if (!$_GET['id']) {
 	$music = Music::getMusicById($_GET['id']);
 }
 $masterUser = User::getUserByIdObj($music->user_id);
+$comment = new Comment();
+$comment->getCommentByMusicId($music->id);
+$author = $comment->getAuthorObj();
 
 
 
@@ -84,7 +88,12 @@ $masterUser = User::getUserByIdObj($music->user_id);
 					like
 				</div>
 				<div class="col-md-8">
-					<textarea rows="2" cols="30" placeholder="Написать комментарий"></textarea>
+					<form method="post" action="../backend/comment.php">
+						<input type="hidden" name="author" value="<?=$user->id?>" />
+						<input type="hidden" name="music_id" value="<?=$music->id?>" />
+					<textarea rows="2" cols="30" placeholder="Написать комментарий" name="comment" required></textarea>
+						<input type="submit" value="Отправить" />
+						</form>
 				</div>
 				<div class="col-md-2">+</div>
 			</div>
@@ -92,23 +101,21 @@ $masterUser = User::getUserByIdObj($music->user_id);
 				<div class="col-md-1">
 					<img src="assets/img/avatar.jpg" alt="" class="comment-prev-avatar">
 				</div>
+				<?php
+				$commentList = $comment->getAllCommentByMusicId($music->id);
+				for ($i = 0; $i < count($commentList); $i++) {
+				if ($i > 8) break;
+				$currentComment = $commentList[$i];
+					$currentAuthor = User::getUserByIdObj($currentComment['author']);
+				?>
 				<div class="col-md-11">
-					<p class="comment-author"><a href="user.html">Jennycat</a> <span
-							class="comment-date">1 месяц назад</span></p>
-					<p>Божественно)))</p>
+					<p class="comment-author"><a href=<?="user.php?id=" . $currentAuthor->id?>><?=$currentAuthor->login?></a></p>
+					<p><?=$currentComment['content']?></p>
 				</div>
+				<?php } ?>
 			</div>
 			<br>
-			<div class="row">
-				<div class="col-md-1">
-					<img src="assets/img/avatar.jpg" alt="" class="comment-prev-avatar">
-				</div>
-				<div class="col-md-11">
-					<p class="comment-author"><a href="user.html">pi3denish</a> <span
-							class="comment-date">сегодня</span></p>
-					<p>Klein, как всегда: в тему, красиво, дорАгА, бАгАтс Так держать!:)</p>
-				</div>
-			</div>
+
 		</div>
 	</div>
 	<?php
