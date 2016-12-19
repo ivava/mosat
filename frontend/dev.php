@@ -1,14 +1,18 @@
 <?php
 require ("../backend/config.php");
 require ("../backend/classes/User.php");
-require ("../backend/classes/Audio.php");
+require ("../backend/classes/Music.php");
 $user = User::getUserByUsername('t');
 $user->addFriend('12');
 $user->addFriend('1');
 
 $user->addFriend('3');
-echo print_r($user) . "<br />";
-echo print_r($user->getFriend_list());
+$us = User::getUserByIdObj(2);
+$us->addFriend(4);
+$us->addFriend(1);
+
+
+echo ($us->getFriend_list()[2]);
 
 ?>
 <p>
@@ -21,10 +25,11 @@ echo print_r($user->getFriend_list());
 //        echo $stat['username'];
 //    }
 
+    $us = $us->getFriend_list();
+    print_r($us);
 
-    $music = new Audio();
 
-    $music->loadFile('../user_file/1/dsd.mp3');
-    echo $music->id3_title;
+   $mus = new Music();
+    echo $mus->getCount();
     ?>
 </p>

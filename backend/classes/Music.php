@@ -164,5 +164,23 @@ class Music
         $this->getThumbByBd();
         return $this->thumb;
     }
+    private function getAllMusicObj() {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT * FROM music";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetchAll(PDO::FETCH_ASSOC);
+        $connect = null;
+        return $rows;
+    }
+    public function getCount() {
+        $allMusic = $this->getAllMusicObj();
+        $count = count($allMusic);
+        $qu = 0;
+        for ($i = 0; $i < $count; $i++) {
+            $qu = $i;
+        }
+        return $qu;
+    }
 
 }

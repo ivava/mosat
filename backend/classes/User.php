@@ -18,6 +18,8 @@ class User
     public $musicList = array();
     public $friends_list = array();
     public $bio;
+    public $musicCount;
+    public $follower;
 
 
     public function __construct($fullName, $login, $mail, $password, $id, $friend_list = '', $bio)
@@ -167,7 +169,35 @@ class User
         $st->bindValue(":friend_list", $str, PDO::PARAM_STR);
         $st->execute();
         $connect = null;
+        $this->folloving($friendId);
     }
+    public function getFollowerList($id) {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT * FROM usertbl WHERE id='".$id."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        return unserialize($rows['follower']);
+    }
+   public function folloving($id) {
+        $this->follower = $this->getFollowerList($id);
+        $this->follower[] = $this->id;
+        $str = serialize($this->follower);
+
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE usertbl
+                SET follower='".$str."'
+                 WHERE id='".$id."'
+                ";
+        $st = $connect->prepare($sql);
+        $st->bindValue(":follower", $str, PDO::PARAM_STR);
+        $st->execute();
+        $connect = null;
+    }
+    public function deleteFriend($id) {
+        $fri
+    }
+
     public function setBio($bio) {
         $this->bio = $bio;
     }
@@ -192,7 +222,23 @@ class User
         $st->execute();
         $connect = null;
         $this->fullName = $value;
-
+    }
+    public function getMosatCount() {
+        $list = $this->getMusicList();
+        $count = 0;
+        for ($i = 0; $i <= count($list); $i++) {
+            $count = $i;
+        }
+        $this->musicCount = $count;
+        return $this->musicCount;
+    }
+    public function isFollow($id) {
+        $friendLIst = $this->getFriend_list();
+        if (is_array($friendLIst)) {
+            return in_array($id, $friendLIst);
+        } else {
+            return false;
+        }
     }
 
 

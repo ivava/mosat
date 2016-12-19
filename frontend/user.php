@@ -9,6 +9,8 @@ if (!isset($_GET['id'])) {
 	$user = User::getUserByIdObj($_GET['id']);
 }
 $musicList = $user->getMusicList();
+$mosatCount = $user->getMosatCount();
+$current_user = User::getUserByUsername($_SESSION['session_username']);
 ?>
 
 <div class="container">
@@ -28,11 +30,18 @@ $musicList = $user->getMusicList();
 					<p class="userlogin">@<?php
 					echo $user->login;
 ?></p>
+					<?php if (!isset($_GET['id'])) { ?>
+
 					<p><a class="btn btn-primary btn-lg user-subscribe" role="button" href="edit_user.php">Редактировать</a></p>
-				</div>
+				<?php	} else { if (!$current_user->isFollow($user->id)) { ?>
+					<p><a class="btn btn-primary btn-lg user-subscribe" role="button" href=<?="../backend/follow.php?id=" .$user->id?>>Подписаться</a></p>
+				</div><?php } else { ?>
+				<p>Вы подписаны</p>
+				<a href="../backend/delete_follow.php">Отписаться нахуй</a>
+				<?php } } ?>
 			</div>
 			<div class="row">
-				<div class="col-md-4"><span class="user-stats"><span class="number">2</span><br>Мосата</span></div>
+				<div class="col-md-4"><span class="user-stats"><span class="number"><?=$mosatCount?></span><br>Мосата</span></div>
 				<div class="col-md-4"><span class="user-stats"><span class="number">3,1К</span><br>Подписчиков</span></div>
 				<div class="col-md-4"><span class="user-stats"><span class="number">17</span><br>Подписок</span></div>
 			</div>

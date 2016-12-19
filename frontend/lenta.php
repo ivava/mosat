@@ -10,10 +10,11 @@ require ('../backend/classes/Music.php');
 <?php
 $user = User::getUserByUsername($_SESSION['session_username']);
 
-$musicCount = Music::getAllMusicCount();
+$musicCount = new Music();
+$musicCount = $musicCount->getCount();
 
 
-for ($i = 1; $i < 100; $i++) {
+for ($i = $musicCount; $i > 0; $i--) {
 //    if ($i > 8) break;
     $music = Music::getMusicById($i);
     $friendUser = User::getUserByIdObj($music->user_id);
