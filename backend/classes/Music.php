@@ -178,7 +178,7 @@ class Music
         $allMusic = $this->getAllMusicObj();
         $count = count($allMusic);
         $qu = 0;
-        for ($i = 0; $i < $count; $i++) {
+        for ($i = 1; $i <= $count; $i++) {
             $qu = $i;
         }
         return $qu;

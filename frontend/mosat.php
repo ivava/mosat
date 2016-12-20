@@ -44,66 +44,84 @@ $author = $comment->getAuthorObj();
 			</div>
 			<div class="row">
 				<div class="col-md-12 album-logo">
-					<img src="
-<?php
-				echo $music->getMusicThumb();
-?>
-" class="full-album-logo">
-					<div class="btn-play">
-						<div class="audio_item">-->
-								<audio controls>
-													<source src="<?php echo $music->path; ?>" type="audio/mpeg">
-
-
-													>
-												</audio>
+					<img src="<?php echo $music->getMusicThumb();?>" class="full-album-logo">
+					<div class="btn-play" id="play">
+						<div class="audio_item">
+                            <audio id="sound" preload="auto" controls>
+	<source src="<?php echo $music->path; ?>" type="audio/mpeg">
+</audio>
 											</div>
-											<div class="music_title">
-											<span>
-												<?php
-												echo $music->title;
-												?>
-											</span>
-											</div>
+                    </div>
 
-					</div>
-				</div>
-			</div>
+                    <script>
+                        var audio = $("#sound")[0];
+                        var btn = $(".btn-play");
+                        //                        $("#play").click(function() {
+                        //                            audio.play();
+                        //                        });
+                        $("#play").click(function () {
+                            if (audio.paused) {
+                                audio.play();
+                                btn.css('background-image','url(assets/img/pause.png)');
+
+                            } else {
+                                audio.pause();
+                                btn.css('background-image','url(assets/img/play.png)');
+                            }
+                        })
+                    </script>
+                </div>
+            </div>
+        </div>
+
+
 			<div class="row text-center">
-				<div class="col-md-12">
+				<div class="col-md-12 track_info_mosat">
 					<p class="post-album-title"><?php
 					echo $music->title;
 						?></p>
-					<a class="like_count" href=<?="../backend/like.php?id=" .$music->id. "&us_id=" .$user->id?>>
-						<?=$music->getLikeCount();?>
-					</a>
-					<p class="post-genre-album">Deep tune</p>
+
+					<p class="post-genre-album">
+                        <?php echo $music->getMusicAuthor(); ?>
+                    </p>
+				</div>
+                <div class="otstup col-md-2"></div>
+                <div class="col-md-3">
+                    <p class="gray_text pull-right"><i class="fa fa-play" aria-hidden="true"></i>141K</p>
+                </div>
+				<div class="col-md-3">
+                    <p class="gray_text">
+                            <i class="fa fa-heart" aria-hidden="true"></i><?=$music->getLikeCount();?></p>
+
 				</div>
 				<div class="col-md-4">
-					<p>141K</p>
-				</div>
-				<div class="col-md-4">
-					<p>366</p>
-				</div>
-				<div class="col-md-4">
-					<p>42</p>
-				</div>
+                    <p class="gray_text pull-left"><i class="fa fa-comment" aria-hidden="true"></i><?=$comment->getCommentCount($music->id)?></p>
+
+                </div>
 			</div>
+
+
 			<div class="row">
-				<div class="col-md-2">
-					like
-				</div>
+                <div class="col-md-2">
+                    <a class="like_count" href=<?="../backend/like.php?id=" .$music->id. "&us_id=" .$user->id?>>
+                        <i class="fa fa-heart btn_mosat btn_mosat_one" aria-hidden="true"></i></a>
+                </div>
+
 				<div class="col-md-8">
 					<form method="post" action="../backend/comment.php">
 						<input type="hidden" name="author" value="<?=$user->id?>" />
 						<input type="hidden" name="music_id" value="<?=$music->id?>" />
-					<textarea rows="2" cols="30" placeholder="Написать комментарий" name="comment" required></textarea>
-						<input type="submit" value="Отправить" />
+					<textarea class="mosat_comment" rows="2" cols="40" placeholder="Ваш комментарий..." name="comment" required></textarea>
+                        <div class="send_comment_btn">
+                        <a><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+						<input class="send_comment" type="submit" value="Отправить" />
+                        </div>
 						</form>
 				</div>
-				<div class="col-md-2">+</div>
-			</div>
-			<div class="row">
+                <div class="col-md-2 pull-left"><i class="fa fa-plus-circle btn_mosat btn_mosat_two" aria-hidden="true"></i></div>
+
+            </div>
+			<div class="row comments">
 				<div class="col-md-1">
 					<img src="assets/img/avatar.jpg" alt="" class="comment-prev-avatar">
 				</div>
@@ -124,6 +142,6 @@ $author = $comment->getAuthorObj();
 
 		</div>
 	</div>
-<!--	<script src="js/addLike.js"></script>-->
+	<script src="js/addLike.js"></script>
 </body>
 </html>

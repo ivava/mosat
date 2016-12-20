@@ -5,26 +5,50 @@ require ('../backend/classes/Music.php');
 
 $music = Music::getMusicById($_SESSION['music_id']);
 ?>
-<form action="../backend/editAudio.php" method="post">
-    <input type="text" name="music_title" placeholder="Название"/>
-    <input type="text" name="music_author" placeholder="Автор" />
-    <input type="submit" value="Сохранить"/>
-</form>
+<div class="progress progress-striped active">
+    <div class="progress-bar" style="width: 33%;">
+    </div>
+</div>
+<div id="animation" class="container create_new_mosat bounceInLeft animated">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h1 class="blue_text">Информация о мосате</h1>
+            <form id="save_name" action="../backend/editAudio.php" method="post">
+                <input class="create_item" type="text" name="music_title" maxlength="18" placeholder="Введите название"/><br>
+                <input class="create_item" type="text" name="music_author" maxlength="18" placeholder="Укажите автора" /><br>
+                <input class="br_button btn btn-primary btn-lg save_save" type="submit" value="Сохранить"/>
+            </form>
 
-<form action="../backend/upload_thumb.php" method="post" enctype="multipart/form-data" id="downloadMusic">
-    <input type="hidden" name="MAX_FILE_SIZE" value="160000000">
-    <input type="file" value="Загрузить с компьютера" class="btn btn-primary btn-lg download-music"
-           name="music_thumb">
-    <input type="submit" value="dow">
-    <div id="cropProgress"></div>
-    <span class="min_val"></span>
-    <span class="max_val"></span>
-</form>
+            <?php
 
-<?=$music->title?> <br />
-<?=$music->getMusicAuthor()?>
-<?php if (isset($music->thumb)) { ?>
-    <img src="<?=$music->thumb?>" />
-<?php } ?>
-<script src="js/cropMusic/range.js"></script>
-<?php //print_r($_SESSION)?>
+            if ($_SESSION['show_thumb'] == 'show') {
+                ?>
+                <div class="well">
+                <p>Название: <?=$music->title?> </p><br />
+                <p>Автор: <?=$music->getMusicAuthor()?> </p>
+                </div>
+                <?php
+            }
+            ?>
+
+
+
+
+
+            <script src="js/cropMusic/range.js"></script>
+            <?php //print_r($_SESSION)?>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(".container").hover(function () {
+            $("#animation").slideDown('slow');
+        })
+
+
+
+</script>
+
+
+

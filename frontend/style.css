@@ -1,7 +1,6 @@
-body {
-	transition: all .4s;
+a:hover {
+	text-decoration: none;
 }
-
 .main-navigation {
 	margin-left: 25%;
 	
@@ -187,7 +186,7 @@ img.full-album-logo {
 }
 
 div.post {
-	border: 1px solid lightgray;
+	box-shadow: 1px 1px 1px 1px lightgray;
 }
 
 div.author-post-info {
@@ -236,11 +235,18 @@ p>a:hover {
 	position: absolute;
 	bottom: 35%;
 	right: 34%;
+	background-repeat: no-repeat;
+	background-position: center;
+	transition: all 0.4s;
 }
 
 .album-logo:hover .btn-play {
 	background-color: rgba(0,0,0,0.4);
-	transition: all 0.1s;
+	background-image: url(assets/img/play.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 30%;
+	transition: all 0.4s;
 }
 
 /* header */
@@ -261,6 +267,21 @@ img.header_avatar {
 	width: 20px;
 	height: 20px;
 	border-radius: 3px;
+}
+
+.post-album-title {
+	text-transform: uppercase;
+}
+.gray_text {
+	color: #cfcfcf;
+	font-size: 22px;
+}
+.gray_text i {
+	margin-right: 5px;
+}
+.track_info_mosat {
+	color: #485949;
+	margin-top: 10px;
 }
 
 /* header end */
@@ -301,7 +322,7 @@ img.header_avatar {
 	font-size: 1em;              /* example */ 	/* example */
 	line-height: 2em;             /* the same as height */
 	width: 250px;
-	margin: 0 auto;
+	margin: 20px auto;
 }
 .file_upload .button, .file_upload > mark{
 	display: block;
@@ -351,7 +372,18 @@ img.header_avatar {
 		display: none
 	}
 
+.done_pc {
+	display: none;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
 
+.down_btn_text {
+	margin-top: 20px;
+	background-color: transparent;
+	border: none;
+	color: #428bca;
+}
 /*other */
 
 .save_bio {
@@ -371,3 +403,138 @@ img.header_avatar {
 	display: inline-block;
 }
 
+/*lenta*/
+.lenta .music_thumb img{
+	width: 100%;
+}
+
+.lenta_item {
+	margin-bottom: 50px;
+	box-shadow: 1px 2px 2px 2px lightgray;
+}
+
+.music_master {
+	padding: 20px 0;
+}
+
+.music_title {
+	text-align: center;
+	padding: 20px 0;
+	font-size: 18px;
+}
+
+
+/*end lenta*/
+
+/*mosat*/
+.btn_mosat {
+	font-size: 38px;
+	color: #3f97c7;
+}
+
+.btn_mosat_one {
+	margin-left: 30px;
+}
+.btn_mosat_two {
+	margin-left: -15px;
+}
+.mosat_comment {
+	border: 1px solid #f5f5f5;
+}
+
+.otstup {
+	padding-left: 0;
+	padding-right: 0;
+	width: 14%;
+}
+
+/*end mosat*/
+
+audio {
+	display: none;
+}
+
+
+/*edit page*/
+.create_new_mosat {
+	text-align: center;
+}
+.create_new_mosat p {
+	font-size: 18px;
+}
+
+.create_item {
+	/*border: 0px solid gray;*/
+	width: 60%;
+	font-size: 22px;
+	margin-bottom: 20px;
+	height: 40px;
+	padding: 20px;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.blue_text {
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #3f97c7;
+	margin-bottom: 20px;
+}
+
+.save_save {
+	width: 60%;
+	height: 50px;
+	border-radius: 50px;
+	margin-bottom: 20px;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.btn_done {
+	width: 40%;
+	border-radius: 60px;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+
+
+.done_mosat p {
+	display: block;
+	margin: 0 auto;
+	font-size: 16px;
+	padding-top: 10px;
+	font-weight: bold;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+/*.down_img {*/
+	/*display: none;*/
+/*}*/
+/*end edit page*/
+
+.inline {
+	display: inline-block;
+}
+
+.send_comment {
+	border: none;
+	background-color: transparent;
+}
+
+.send_comment_btn {
+	border: 1px dotted #3f97c7;
+	border-radius: 5px;
+	padding: 5px;
+	text-align: center;
+	transition: all .4s;
+}
+
+.send_comment_btn:hover {
+	border: 1px solid #3f97c7;
+	background-color: #3f97c7;
+}
+
+.send_comment_btn:hover a, .send_comment_btn:hover input {
+
+	color: #ffffff;
+}
+
+.comments {
+	margin-top: 20px;
+}
