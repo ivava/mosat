@@ -6,15 +6,12 @@ require ("../backend/classes/Comment.php");
 require ('../backend/classes/Music.php');
 //require ('../backend/classes/User.php');
 $user = User::getUserByUsername($_SESSION['session_username']);
-if (!$_GET['id']) {
-    $music = Music::getMusicById($_SESSION['music_id']);
-} else {
-    $music = Music::getMusicById($_GET['id']);
-}
-$masterUser = User::getUserByIdObj($music->user_id);
+
+
+
+
 $comment = new Comment();
-$comment->getCommentByMusicId($music->id);
-$author = $comment->getAuthorObj();
+
 ?>
 
 <div class="container lenta">

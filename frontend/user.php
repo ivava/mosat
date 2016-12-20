@@ -60,7 +60,9 @@ $current_user = User::getUserByUsername($_SESSION['session_username']);
 				$musicListCount = count($musicList);
 				for ($i = 0; $i < $musicListCount; $i++) {
 					if ($i > 8) break;
+					$mosat = $musicList[$i];
 					?>
+					<a href=<?="mosat.php?id=" .$musicList[$i]['id']?>>
 					<div class="col-md-3">
 						<img src="
 <?php
@@ -72,8 +74,9 @@ $current_user = User::getUserByUsername($_SESSION['session_username']);
                             $musicList[$i]['title'] = substr($musicList[$i]['title'], 0, 18);
 					echo $musicList[$i]['title'];
 							?></p>
-						<p class="album-author"> Автор</p>
+						<p class="album-author"><?=$mosat['author']?></p>
 					</div>
+						</a>
 					<?php
 				}
 				?>

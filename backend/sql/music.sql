@@ -5,9 +5,10 @@ CREATE TABLE `music` (
 `path` varchar(128) collate utf8_unicode_ci NOT NULL default '',
 `start` int(11) collate utf8_unicode_ci NOT NULL,
 `end` int(11) collate utf8_unicode_ci NOT NULL,
-`thumb` VARCHAR (64) collate utf8_unicode_ci NOT NULL default '',
+`thumb` VARCHAR (128) collate utf8_unicode_ci NOT NULL default 'assets/img/default.png',
 `author` VARCHAR (32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
 `like_count` INT (128) COLLATE utf8_unicode_ci NOT NULL DEFAULT 0,
+`music_incr` INT (128) COLLATE utf8_unicode_ci NOT NULL DEFAULT 0,
 PRIMARY KEY  (`id`),
 UNIQUE KEY `title` (`title`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

@@ -64,6 +64,11 @@ $author = $comment->getAuthorObj();
                                 audio.play();
                                 btn.css('background-image','url(assets/img/pause.png)');
 
+								$.ajax({
+									type: 'GET',
+									url: '../backend/add_music_qu.php?id=' + <?=$music->id?>
+								})
+
                             } else {
                                 audio.pause();
                                 btn.css('background-image','url(assets/img/play.png)');
@@ -87,7 +92,7 @@ $author = $comment->getAuthorObj();
 				</div>
                 <div class="otstup col-md-2"></div>
                 <div class="col-md-3">
-                    <p class="gray_text pull-right"><i class="fa fa-play" aria-hidden="true"></i>141K</p>
+                    <p class="gray_text pull-right"><i class="fa fa-play" aria-hidden="true"></i><?=$music->getMusicIncr()?></p>
                 </div>
 				<div class="col-md-3">
                     <p class="gray_text">
@@ -122,9 +127,7 @@ $author = $comment->getAuthorObj();
 
             </div>
 			<div class="row comments">
-				<div class="col-md-1">
-					<img src="assets/img/avatar.jpg" alt="" class="comment-prev-avatar">
-				</div>
+
 				<?php
 				$commentList = $comment->getAllCommentByMusicId($music->id);
 				for ($i = 0; $i < count($commentList); $i++) {
@@ -132,10 +135,14 @@ $author = $comment->getAuthorObj();
 				$currentComment = $commentList[$i];
 					$currentAuthor = User::getUserByIdObj($currentComment['author']);
 				?>
+					<div class="col-md-1">
+						<img src=<?=$currentAuthor->getAvatar()?> alt="" class="comment-prev-avatar">
+					</div>
 				<div class="col-md-11">
 					<p class="comment-author"><a href=<?="user.php?id=" . $currentAuthor->id?>><?=$currentAuthor->login?></a></p>
 					<p><?=$currentComment['content']?></p>
 				</div>
+
 				<?php } ?>
 			</div>
 			<br>

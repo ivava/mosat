@@ -16,6 +16,7 @@ class Music
     public $timeLine = array();
     public $author;
     public $likeCount;
+    public $musicIncr;
 
 
 
@@ -214,6 +215,29 @@ class Music
          WHERE id='".$this->id."'";
         $st = $connect->prepare($sql);
         $st->bindValue(":like_count", $this->likeCount, PDO::PARAM_INT);
+        $st->execute();
+        $connect = null;
+    }
+    public function getMusicIncr() {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT * FROM music WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        if (isset($rows['music_incr'])) {
+            return $rows['music_incr'];
+        } else {
+            return 0;
+        }
+    }
+    public function addMusicIncr() {
+        $this->musicIncr = $this->getMusicIncr() + 1;
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE music
+        SET music_incr='".$this->musicIncr."'
+         WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->bindValue(":music_incr", $this->musicIncr, PDO::PARAM_INT);
         $st->execute();
         $connect = null;
     }
