@@ -20,6 +20,7 @@ class User
     public $bio;
     public $musicCount;
     public $follower;
+    public $mosatLike = array();
 
 
     public function __construct($fullName, $login, $mail, $password, $id, $friend_list = '', $bio)
@@ -153,8 +154,11 @@ class User
         $st = $connect->prepare($sql);
         $st->execute();
         $rows = $st->fetch(PDO::FETCH_ASSOC);
-        return unserialize($rows['friend_list']);
-    }
+        $arr = 0;
+
+          return $arr = unserialize($rows['friend_list']);
+
+        }
     public function addFriend($friendId) {
         $this->friends_list = $this->getFriend_list();
         $this->friends_list[] = $friendId;
@@ -170,6 +174,23 @@ class User
         $st->execute();
         $connect = null;
         $this->folloving($friendId);
+    }
+    public function getFriendCount() {
+        $this->friends_list = $this->getFriend_list();
+        $count = 0;
+        for ($i = 0; $i < count($this->friends_list); $i++) {
+            $count = $i;
+        }
+        return $count;
+    }
+    public function getFollowCount() {
+        $this->follower = $this->getFollowerList($this->id);
+
+        $count = 0;
+        for ($i = 0; $i < count($this->follower); $i++) {
+            $count = $i;
+        }
+        return $count;
     }
     public function getFollowerList($id) {
         $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
@@ -195,7 +216,41 @@ class User
         $connect = null;
     }
     public function deleteFriend($id) {
-        $fri
+        $friendList = $this->getFriend_list();
+        $key = array_search($id, $friendList);
+        if ($key !== false) {
+           unset($friendList[$key]);
+        }
+
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE usertbl
+                SET friend_list='".$friendList."'
+                 WHERE id='".$this->id."'
+                ";
+
+        $st = $connect->prepare($sql);
+        $st->bindValue(":friend_list", $friendList, PDO::PARAM_STR);
+        $st->execute();
+        $connect = null;
+        $this->deleteFollower($id);
+    }
+    public function deleteFollower($id) {
+        $followList = $this->getFollowerList($id);
+        $key = array_search($this->id, $followList);
+
+        if ($key !== false) {
+            unset($followList[$key]);
+        }
+
+        $connnect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE usertbl
+                SET follower='".$followList."'
+                 WHERE id='".$id."'
+                ";
+        $st = $connnect->prepare($sql);
+        $st->bindValue(":follower", $followList, PDO::PARAM_STR);
+        $st->execute();
+        $connnect = null;
     }
 
     public function setBio($bio) {
@@ -240,6 +295,42 @@ class User
             return false;
         }
     }
+    public function getLikedList($userId) {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT * FROM usertbl WHERE id='".$userId."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        $arr = 0;
+        return $arr = unserialize($rows['mosat_like']);
+    }
+    public function addToLikedMusic($userId, $musicId) {
+        $this->mosatLike = $this->getLikedList($userId);
+        if (!in_array($musicId, $this->mosatLike)) {
+            $this->mosatLike[] = $musicId;
+            $str = serialize($this->mosatLike);
+            $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+            $sql = "UPDATE usertbl
+                SET mosat_like='" . $str . "'
+                 WHERE id='" . $userId . "'
+                ";
+            $st = $connect->prepare($sql);
+            $st->bindValue(":mosat_like", $str, PDO::PARAM_STR);
+            $st->execute();
+            $connect = null;
+        }
 
+
+
+    }
+    public function isLiked($music_id) {
+        $likeList = $this->getLikedList($this->id);
+
+        if (is_array($likeList)) {
+            return in_array($music_id, $likeList);
+        } else {
+            return false;
+        }
+    }
 
 }

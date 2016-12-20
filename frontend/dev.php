@@ -1,18 +1,24 @@
 <?php
+session_start();
+
 require ("../backend/config.php");
 require ("../backend/classes/User.php");
 require ("../backend/classes/Music.php");
+cuser = $cuser::getUserByUsername($_SESSION['session_username']);
 $user = User::getUserByUsername('t');
 $user->addFriend('12');
 $user->addFriend('1');
 
 $user->addFriend('3');
-$us = User::getUserByIdObj(2);
+$us = User::getUserByIdObj(1);
 $us->addFriend(4);
 $us->addFriend(1);
+$us->addFriend(5);
 
+echo $cuser->getFriendCount();
 
-echo ($us->getFriend_list()[2]);
+$us->getLikedList();
+echo ($us->isFollow(2));
 
 ?>
 <p>
@@ -25,11 +31,9 @@ echo ($us->getFriend_list()[2]);
 //        echo $stat['username'];
 //    }
 
-    $us = $us->getFriend_list();
-    print_r($us);
 
 
-   $mus = new Music();
-    echo $mus->getCount();
+
+
     ?>
 </p>

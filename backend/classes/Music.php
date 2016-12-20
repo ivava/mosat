@@ -15,6 +15,7 @@ class Music
     public $thumb;
     public $timeLine = array();
     public $author;
+    public $likeCount;
 
 
 
@@ -181,6 +182,29 @@ class Music
             $qu = $i;
         }
         return $qu;
+    }
+    public function getLikeCount() {
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "SELECT * FROM music WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->execute();
+        $rows = $st->fetch(PDO::FETCH_ASSOC);
+        if (isset($rows['like_count'])) {
+            return $rows['like_count'];
+        } else {
+            return 0;
+        }
+    }
+    public function addLike() {
+       $this->likeCount = $this->getLikeCount() + 1;
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE music
+        SET like_count='".$this->likeCount."'
+         WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->bindValue(":like_count", $this->likeCount, PDO::PARAM_INT);
+        $st->execute();
+        $connect = null;
     }
 
 }

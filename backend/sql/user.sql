@@ -11,3 +11,6 @@ PRIMARY KEY  (`id`),
 UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+follower
+mosat_like
+
