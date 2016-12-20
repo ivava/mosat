@@ -206,5 +206,16 @@ class Music
         $st->execute();
         $connect = null;
     }
+    public function deleteLike() {
+        $this->likeCount = $this->getLikeCount() - 1;
+        $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE music
+        SET like_count='".$this->likeCount."'
+         WHERE id='".$this->id."'";
+        $st = $connect->prepare($sql);
+        $st->bindValue(":like_count", $this->likeCount, PDO::PARAM_INT);
+        $st->execute();
+        $connect = null;
+    }
 
 }

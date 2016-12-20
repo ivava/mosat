@@ -302,12 +302,20 @@ class User
         $st->execute();
         $rows = $st->fetch(PDO::FETCH_ASSOC);
         $arr = 0;
-        return $arr = unserialize($rows['mosat_like']);
+        $arr = unserialize($rows['mosat_like']);
+        return $arr;
     }
     public function addToLikedMusic($userId, $musicId) {
-        $this->mosatLike = $this->getLikedList($userId);
-        if (!in_array($musicId, $this->mosatLike)) {
-            $this->mosatLike[] = $musicId;
+        $arr = $this->getLikedList($userId);
+        if (is_array($arr)) {
+            $this->mosatLike = $arr;
+        } else {
+            $this->mosatLike = array();
+        }
+
+
+//            $this->mosatLike[] = $musicId;
+            array_push($this->mosatLike, $musicId);
             $str = serialize($this->mosatLike);
             $connect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
             $sql = "UPDATE usertbl
@@ -318,10 +326,6 @@ class User
             $st->bindValue(":mosat_like", $str, PDO::PARAM_STR);
             $st->execute();
             $connect = null;
-        }
-
-
-
     }
     public function isLiked($music_id) {
         $likeList = $this->getLikedList($this->id);
@@ -332,5 +336,43 @@ class User
             return false;
         }
     }
+    public function deleteLikeMusic($music_id) {
+        $likeList = $this->getLikedList($this->id);
+        $key = array_search($music_id, $likeList);
+
+        if ($key !== false) {
+            unset($likeList[$key]);
+        }
+        $connnect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE usertbl
+                SET mosat_like='".$likeList."'
+                 WHERE id='".$this->id."'
+                ";
+        $st = $connnect->prepare($sql);
+        $st->bindValue(":mosat_like", $likeList, PDO::PARAM_STR);
+        $st->execute();
+        $connnect = null;
+
+
+
+        $followList = $this->getFollowerList($id);
+        $key = array_search($this->id, $followList);
+
+        if ($key !== false) {
+            unset($followList[$key]);
+        }
+
+        $connnect = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        $sql = "UPDATE usertbl
+                SET follower='".$followList."'
+                 WHERE id='".$id."'
+                ";
+        $st = $connnect->prepare($sql);
+        $st->bindValue(":follower", $followList, PDO::PARAM_STR);
+        $st->execute();
+        $connnect = null;
+    }
+
+
 
 }

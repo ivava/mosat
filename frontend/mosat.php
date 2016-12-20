@@ -22,6 +22,7 @@ $author = $comment->getAuthorObj();
 
 <form action="">
 	<input type="hidden" name="hId" id="mId" value="<?=$music->id?>">
+	<input type="hidden" name=uId" id="uId" value="<?=$user->id?>">
 </form>
 
 	<div class="container lenta">
@@ -73,7 +74,7 @@ $author = $comment->getAuthorObj();
 					<p class="post-album-title"><?php
 					echo $music->title;
 						?></p>
-					<a class="like_count" href=<?="../backend/add_like.php?id=" .$music->id ?>>
+					<a class="like_count" href=<?="../backend/like.php?id=" .$music->id. "&us_id=" .$user->id?>>
 						<?=$music->getLikeCount();?>
 					</a>
 					<p class="post-genre-album">Deep tune</p>
@@ -123,6 +124,6 @@ $author = $comment->getAuthorObj();
 
 		</div>
 	</div>
-	<script src="js/addLike.js"></script>
+<!--	<script src="js/addLike.js"></script>-->
 </body>
 </html>
