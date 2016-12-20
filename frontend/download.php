@@ -3,6 +3,7 @@ include ("templates/header.php");
 require ("../backend/classes/Music.php");
 if (!isset($_SESSION['upload'])) {
 	$_SESSION['upload'] = '';
+	$_SESSION['show_thumb'] = '';
 }
 $_SESSION['music_id'] = '';
 ?>
@@ -14,13 +15,30 @@ $_SESSION['music_id'] = '';
 			<form action="../backend/upload.php" method="post" enctype="multipart/form-data" id="downloadMusic">
 				<input type="hidden" name="MAX_FILE_SIZE" value="160000000">
                 <div class="file_upload">
-                    <button type="button" class="btn btn-primary btn-lg ">Загрузить с компьютера</button>
+                    <button id="down_to_pc" type="button" class="btn btn-primary btn-lg">Загрузить с компьютера</button>
                     <div>Файл не выбран</div>
-                    <input type="file" name="music_file" required>
+                    <input id="mytits" type="file" name="music_file" required>
                 </div>
-                <input type="submit" value="dow">
+                <input class="down_btn_text done_pc" type="submit" value="Загрузить выбранный файл">
 			</form>
+            <script>
+                $(document).ready(function () {
+                    $("#down_to_pc").click(function(event) {
+                        $(".done_pc").show();
+                        event.preventDefault();
+                    })
+                    setInterval(function () {
+                        if (!$("#mytits").val()) {
+                            $(".done_pc").hide();
+                        }
+                        else {
+                            $(".done_pc").show();
+                        }
+                    }, 500)
 
+                })
+
+            </script>
 			<?php
 		}
 			?>
@@ -60,10 +78,6 @@ $_SESSION['music_id'] = '';
 
 
 			?>
-			<form action="../backend/upload.php" method="get">
-				<input type="hidden" name="done"/>
-				<input type="submit" value="Готово">
-			</form>
 
 			<?php
 

@@ -4,5 +4,5 @@ CREATE TABLE `comment` (
 `content` varchar(256) collate utf8_unicode_ci NOT NULL default '',
 `music_id` INT collate utf8_unicode_ci NOT NULL default '',
 PRIMARY KEY  (`id`),
-UNIQUE KEY `username` (`username`)
+UNIQUE KEY `author` (`author`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

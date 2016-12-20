@@ -12,6 +12,7 @@ if (isset($new_author)) {
     $music->updateAuthor($new_author);
     $_SESSION['music_author'] = $music->author;
 }
+$_SESSION['show_thumb'] = 'show';
 header('location: ../frontend/edit_audio.php');
 ?>
 
