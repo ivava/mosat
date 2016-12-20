@@ -6,8 +6,8 @@ CREATE TABLE `music` (
 `start` int(11) collate utf8_unicode_ci NOT NULL,
 `end` int(11) collate utf8_unicode_ci NOT NULL,
 `thumb` VARCHAR (64) collate utf8_unicode_ci NOT NULL default '',
-'author' VARCHAR (32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-'like_count' INT (128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+`author` VARCHAR (32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+`like_count` INT (128) COLLATE utf8_unicode_ci NOT NULL DEFAULT 0,
 PRIMARY KEY  (`id`),
 UNIQUE KEY `title` (`title`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

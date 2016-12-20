@@ -36,10 +36,11 @@ $current_user = User::getUserByUsername($_SESSION['session_username']);
 				<?php	} else { if (!$current_user->isFollow($user->id)) { ?>
 					<p><a class="btn btn-primary btn-lg user-subscribe" role="button" href=<?="../backend/follow.php?id=" .$user->id?>>Подписаться</a></p>
 				</div><?php } else { ?>
-				<p>Вы подписаны</p>
-				<a href=<?="../backend/delete_follow.php?id=" .$user->id?>>Отписаться нахуй</a>
+				<p class="inline">Вы подписаны</p>
+				<a class="unfollow" href=<?="../backend/delete_follow.php?id=" .$user->id?>>Отписаться</a>
 				<?php } } ?>
 			</div>
+        </div>
 			<div class="row">
 				<div class="col-md-4"><span class="user-stats"><span class="number"><?=$mosatCount?></span><br>Мосата</span></div>
 				<div class="col-md-4"><span class="user-stats"><span class="number"><?=$user->getFollowCount()?></span><br>Подписчиков</span></div>
@@ -67,9 +68,11 @@ $current_user = User::getUserByUsername($_SESSION['session_username']);
 					?>
 					" class="album-logo">
 						<p class="album-title"><?php
+                            $musicList[$i]['title'] = strip_tags($musicList[$i]['title']);
+                            $musicList[$i]['title'] = substr($musicList[$i]['title'], 0, 18);
 					echo $musicList[$i]['title'];
 							?></p>
-						<p class="album-author">AURTOR</p>
+						<p class="album-author"> Автор</p>
 					</div>
 					<?php
 				}

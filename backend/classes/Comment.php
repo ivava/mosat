@@ -79,4 +79,14 @@ class Comment
         return $rows;
     }
 
+    public function getCommentCount($id) {
+        $allComment = $this->getAllCommentByMusicId($id);
+        $count = count($allComment);
+        $x = 0;
+        for ($i = 0; $i <= $count; $i++) {
+            $x = $i;
+        }
+        return $x;
+    }
+
     }

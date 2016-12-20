@@ -21,7 +21,7 @@ if (!empty($_POST['full_name']) && !empty($_POST['email']) && !empty($_POST['use
     } else {
         session_start();
         $_SESSION['session_username'] = $user->login;
-        header("location: ../frontend/intro.php");
+        header("location: ../frontend/user.php");
     }
 } else {
     echo "Необходимо заполнить все поля";
